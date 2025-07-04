@@ -1,0 +1,35 @@
+.sidebar{
+    width: 25%;
+}
+
+.selected:hover{
+    background-color: hsl(215, 13%, 48%);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.link{
+    text-decoration: none;
+    color: #212529;
+}
+
+@media screen and (max-width: 1100px) {
+    .sidebar{
+        width: 40%;
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+    .sidebar{
+        width: 60%;
+    }
+    
+}
+
+@media screen and (max-width: 500px) {
+    .sidebar{
+        width: 100vh;
+    }
+    
+}

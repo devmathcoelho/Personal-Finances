@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { HttpRequestsService } from './HttpRequests.service';
 
 @Component({
   selector: 'app-Home',
   templateUrl: './Home.component.html',
   styleUrls: ['./Home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+  httpRequest: HttpRequestsService = inject(HttpRequestsService);
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  money = this.httpRequest.getMoney()
+  expense_month_total = this.httpRequest.getExpensesMonth();
 }

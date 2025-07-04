@@ -9,4 +9,5 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'Client_Side';
+  width: number = window.screen.width;
 }

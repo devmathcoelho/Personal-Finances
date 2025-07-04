@@ -1,1 +1,32 @@
-<router-outlet/>
+<div class="d-flex vh-100">
+    @if(width > 700){
+        <aside class="sidebar m-0">
+            <div class="d-flex flex-column justify-content-around fs-5 p-5 pt-4 h-100 bg-dark-subtle text-dark">
+                <h2 class="text-center text-dark">Matheus Coelho</h2>
+
+                <ul class="d-flex flex-column gap-3 list-unstyled">
+                    <li class="selected ps-4 p-2 rounded-3">
+                        <a href="" class="link">Dashboard</a>
+                    </li>
+                    <li class="selected ps-4 p-2 rounded-3">
+                        <a href="" class="link">Wallet</a>
+                    </li>
+                    <li class="selected ps-4 p-2 rounded-3">
+                        <a href="" class="link">Transactions</a>
+                    </li>
+                    <li class="selected ps-4 p-2 rounded-3">
+                        <a href="" class="link">Search</a>
+                    </li>
+                </ul>
+
+
+                <ul class="d-flex flex-column gap-3 list-unstyled border-top border-dark pt-4">
+                    <li class="selected ps-4 p-2 rounded-3">Setting</li>
+                    <li class="selected ps-4 p-2 rounded-3">Help</li>
+                    <li class="selected ps-4 p-2 rounded-3">Log Out</li>
+                </ul>
+            </div>
+        </aside>
+    }
+    <router-outlet/>
+</div>
