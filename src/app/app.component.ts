@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HttpRequestsService } from './Home/HttpRequests.service';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,14 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'Client_Side';
   width: number = window.screen.width;
+  selected?: string;
+
+  httpService = inject(HttpRequestsService);
+
+  isAuthenticated = this.httpService.isAuthenticated;
+
+  changeSelected(selected: string){
+    this.selected = selected;
+  }
+
 }

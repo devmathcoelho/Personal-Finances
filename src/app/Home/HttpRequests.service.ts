@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class HttpRequestsService {
+  isAuthenticated: boolean = false
+
 
   getMoney() {
     return 200;
