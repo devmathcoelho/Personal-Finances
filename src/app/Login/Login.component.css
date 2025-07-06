@@ -1,6 +1,32 @@
-*{
-    background-color: #444;
+.loginscreen{
+    width: 35%;
+    position: absolute;
+    top: 25%;
+    left: 32%;
 }
-h1{
-    color: white;
+
+.loginscreen_bg{
+    background-color: #070f12;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+@media screen and (max-width: 800px) {
+    .loginscreen{
+        width: 50%;
+        left: 25%;
+    }
+    
+}
+
+@media screen and (max-width: 500px) {
+    .loginscreen{
+        width: 80%;
+        left: 10%;
+    }
+    
 }

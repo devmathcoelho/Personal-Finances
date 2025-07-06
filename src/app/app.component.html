@@ -1,17 +1,25 @@
+<div class="position-fixed z-2 p-3 w-auto top-0 end-0">
+    <a (click)="toggleSidebar()">
+        <h3>
+            <i class="bi bi-grid-3x3-gap"></i>
+        </h3>
+    </a>
+</div>
+
 <div class="d-flex vh-100">
-        <aside class="sidebar m-0 border-end border-light">
+        <aside class="sidebar flex-shrink-0 m-0 border-end border-light">
             <div class="d-flex flex-column justify-content-around fs-5 p-4 pt-2 h-100 bg-primary text-light">
                 <h2 class="text-center">Matheus Coelho</h2>
 
                 <ul class="d-flex flex-column gap-3 list-unstyled">
                     <li class="ps-4 p-2 rounded-3" [class.selected]="selected == 'dashboard'">
-                        <a (click)="changeSelected('dashboard')" class="d-flex gap-3 link text-light">
+                        <a routerLink="/home" (click)="changeSelected('dashboard')" class="d-flex gap-3 link text-light">
                             <i class="bi bi-house"></i>
                             Dashboard
                         </a>
                     </li>
                     <li class="ps-4 p-2 rounded-3" [class.selected]="selected == 'wallet'">
-                        <a (click)="changeSelected('wallet')" class="d-flex gap-3 link text-light">
+                        <a (click)="changeSelected('wallet')" routerLink="/wallet" class="d-flex gap-3 link text-light">
                             <i class="bi bi-wallet"></i>
                             Wallet
                         </a>
@@ -45,15 +53,17 @@
                         </a>
                     </li>
                     <li class="ps-4 p-2 rounded-3">
-                        <a href="" class="d-flex gap-3 link text-light">
                             @if(isAuthenticated){
-                                <i class="bi bi-box-arrow-in-left"></i>
-                                Logout
+                                <a class="d-flex gap-3 link text-light">
+                                    <i class="bi bi-box-arrow-in-left text-light"></i>
+                                    Logout
+                                </a>
                             } @else {
-                                <i class="bi bi-box-arrow-in-right"></i>
-                                Login
+                                 <a routerLink="/login" class="d-flex gap-3 link text-light">
+                                    <i class="bi bi-box-arrow-in-right text-light"></i>
+                                    Login
+                                </a>
                             }
-                        </a>
                     </li>
                 </ul>
             </div>
