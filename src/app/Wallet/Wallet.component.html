@@ -1,5 +1,8 @@
 <main class="main-width d-flex flex-column justify-content-center mt-5">
-  <div class="container w-75">
+  <div class="container-fluid">
+
+    <app-wallet_chart></app-wallet_chart>
+
     <h1 class="text-center">Wallet</h1>
 
     <form method="get">
@@ -23,8 +26,11 @@
       </nav>
     </form>
 
-    <table class="table caption-top table-columns table-bordered table-dark table-striped table-hover">
-      <caption class="text-left text-light">Total expenses: {{expenses_total_month}}</caption>
+    <table class="table caption-top table-bordered table-dark table-hover text-center"
+     [class.table-columns]="width == 600">
+      <caption class="text-left text-light">Total expenses: {{expenses_total_month}} <br>
+        Total revenue: {{revenues_total_month}}
+      </caption>
       <thead>
           <tr>
             <th>Name</th>
@@ -34,11 +40,15 @@
       </thead>
 
       <tbody class="table-group-divider">
-          <tr>
-            <td>{{expense.name}}</td>
-            <td>{{expense.amount}}</td>
-            <td>{{expense.date}}</td>
-          </tr>
+          @for (i of totalWallet; track $index) {
+            <tr>
+              <td>{{totalWallet[$index].name}}</td>
+              <td class="bg-{{ totalWallet[$index].amount < 0 ? 'danger' : 'success' }}">
+                  {{totalWallet[$index].amount}}
+              </td>
+              <td>{{totalWallet[$index].date}}</td>
+            </tr>
+          }
         </tbody>
     </table>
   </div>

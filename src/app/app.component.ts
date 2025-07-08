@@ -24,6 +24,11 @@ export class AppComponent {
   toggleSidebar(){
     const sidebar = document.querySelector('.sidebar');
     sidebar?.classList.toggle('d-none');
+
+    if(this.width > 700){
+      const main_div = document.querySelector('.main-grid');
+      main_div?.classList.toggle('d-grid');
+    }
   }
 
 }
