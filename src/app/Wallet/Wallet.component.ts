@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Expense, Revenue } from '../Expense';
 import { DateFormatService } from '../DateFormat.service';
-import { Wallet_graphComponent } from "./wallet_chart/wallet_chart.component";
-
+import { Wallet_chartsComponent } from './Wallet_charts/Wallet_charts.component';
 @Component({
   selector: 'app-Wallet',
   host:{
@@ -10,7 +9,7 @@ import { Wallet_graphComponent } from "./wallet_chart/wallet_chart.component";
   },
   templateUrl: './Wallet.component.html',
   styleUrls: ['./Wallet.component.css'],
-  imports: [Wallet_graphComponent]
+  imports: [Wallet_chartsComponent]
 })
 export class WalletComponent {
   expensesArray: Array<Expense> = [];

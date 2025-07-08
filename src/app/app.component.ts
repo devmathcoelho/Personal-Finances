@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HttpRequestsService } from './Home/HttpRequests.service';
-
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink],
