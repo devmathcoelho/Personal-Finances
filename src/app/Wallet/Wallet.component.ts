@@ -2,14 +2,15 @@ import { Component, inject } from '@angular/core';
 import { Expense, Revenue } from '../Expense';
 import { DateFormatService } from '../DateFormat.service';
 import { Wallet_chartsComponent } from './Wallet_charts/Wallet_charts.component';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-Wallet',
-  host:{
-      class:''
-  },
   templateUrl: './Wallet.component.html',
   styleUrls: ['./Wallet.component.css'],
-  imports: [Wallet_chartsComponent]
+  host: {
+    class: 'wallet-main'
+  },
+  imports: [Wallet_chartsComponent, RouterLink]
 })
 export class WalletComponent {
   expensesArray: Array<Expense> = [];
@@ -25,12 +26,14 @@ export class WalletComponent {
   expense: Expense = {
     name: 'Carro',
     amount: -100,
+    category: 'Transportation',
     date: this.dateFormat.formatDate(new Date(2025, 7, 2))
   };
 
   revenue: Revenue = {
     name: 'McDonalds',
     amount: 100,
+    category: 'Food',
     date: this.dateFormat.formatDate(new Date(2025, 7, 10))
   };
 
@@ -41,6 +44,7 @@ export class WalletComponent {
       this.revenuesArray.push(this.revenue);
     }
 
+    // totalWallet receives the array of expenses and revenues
     this.totalWallet = this.expensesArray.concat(this.revenuesArray);
     this.totalWallet = this.sortWalletByDate(this.totalWallet);
 
@@ -56,6 +60,7 @@ export class WalletComponent {
     }
   }
 
+  // Returns the total amount of expenses
   expenseCalc(){
     let total = 0;
     
@@ -64,6 +69,7 @@ export class WalletComponent {
     return total;
   }
 
+  // Returns the total amount of revenue
   revenueCalc(){
     let total = 0;
     
@@ -72,6 +78,7 @@ export class WalletComponent {
     return total;
   }
 
+  // Sorts the wallet by date
   sortWalletByDate(totalWallet: any[]) {
       return totalWallet.sort((a, b) => {
       const dateA = new Date(a.date);

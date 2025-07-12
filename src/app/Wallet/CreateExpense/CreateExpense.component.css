@@ -1,0 +1,11 @@
+.main-size{
+    width: 40vw !important;
+}
+
+@media screen and (max-width: 800px) {
+    .main-size{
+        width: 80vw !important;
+        margin: 25vh auto;
+    }
+    
+}

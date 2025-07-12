@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
+import { Wallet_chartsService } from './Wallet_charts.service';
 
 @Component({
   selector: 'app-wallet_chart',
@@ -9,11 +10,39 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class Wallet_chartsComponent {
 
+  chartService = inject(Wallet_chartsService);
+
   barChartData = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+             'August', 'September', 'October', 'November', 'December'],
     datasets: [{
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
+      label: 'Incoming',
+      data: this.chartService.Incoming,
+      borderWidth: 2
+    },
+    {
+      label: 'Bills',
+      data: this.chartService.Bills,
+      borderWidth: 1
+    },
+    {
+      label: 'Food',
+      data: this.chartService.Food,
+      borderWidth: 1
+    },
+    {
+      label: 'Transportation',
+      data: this.chartService.Transportation,
+      borderWidth: 1
+    },
+    {
+      label: 'Credit Card',
+      data: this.chartService.CreditCard,
+      borderWidth: 1
+    },
+    {
+      label: 'Others',
+      data: this.chartService.Others,
       borderWidth: 1
     }]
   };
@@ -21,8 +50,15 @@ export class Wallet_chartsComponent {
   barChartOptions =  {
     scales: {
       y: {
-        beginAtZero: true
+              grid: {
+        display: true,
+        color: "#5d1840"
       }
-    }
+    },
+    x: {
+      grid: {
+        display: false
+      }
+    }}
   };
 }

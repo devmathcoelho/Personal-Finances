@@ -11,8 +11,34 @@
 }
 
 @media screen and (max-width: 500px) {
-    .main-width{
-        width: 100vw;
-    }
     
+    .main-width{
+        margin: 0 5vw;
+        width: 80vw;
+    }
+
+    #search{
+        width: 100%;
+    }
+
+    app-wallet_chart{
+        display: none;
+    }
+    .input-group{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    th {
+        display: none;
+    }
+    tr{
+        border-top: 0.1rem solid #fff;
+    }
+    td {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 0.7rem;
+    }
 }

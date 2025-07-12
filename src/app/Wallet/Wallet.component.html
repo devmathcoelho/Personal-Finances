@@ -4,13 +4,16 @@
     <app-wallet_chart></app-wallet_chart>
 
     <h1 class="text-center">Wallet</h1>
-
-    <form method="get">
+    <form>
       <nav>
         <div class="input-group mb-3 gap-2">
-          <input type="text" class="form-control bg-primary rounded-3" aria-label="Search">
-        
+          <input id="search" type="text" class="form-control bg-primary rounded-3" aria-label="Search">
+
           <div class="dropdown">
+            <a routerLink="/add-expense-revenue" class="text-light m-auto">
+              <i class="bi bi-plus"></i>
+            </a>
+
             <button class="btn btn-primary rounded-2 dropdown-toggle z-0" data-bs-toggle="dropdown">Filters</button>
 
             <div class="dropdown-menu dropdown-menu-dark">
@@ -26,8 +29,7 @@
       </nav>
     </form>
 
-    <table class="table caption-top table-bordered table-dark table-hover text-center"
-     [class.table-columns]="width == 600">
+    <table class="table caption-top table-bordered table-dark table-hover text-center">
       <caption class="text-left text-light">Total expenses: {{expenses_total_month}} <br>
         Total revenue: {{revenues_total_month}}
       </caption>
@@ -35,6 +37,7 @@
           <tr>
             <th>Name</th>
             <th>Amount</th>
+            <th>Category</th>
             <th>Date</th>
           </tr>
       </thead>
@@ -46,6 +49,7 @@
               <td class="bg-{{ totalWallet[$index].amount < 0 ? 'danger' : 'success' }}">
                   {{totalWallet[$index].amount}}
               </td>
+              <td>{{totalWallet[$index].category}}</td>
               <td>{{totalWallet[$index].date}}</td>
             </tr>
           }
