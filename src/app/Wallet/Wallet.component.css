@@ -1,5 +1,9 @@
+form{
+    margin-top: 2vh;
+}
+
 .main-width{
-    width: 50vw;
+    width: 52vw;
     margin: 0 auto;
 }
 
@@ -11,7 +15,10 @@
 }
 
 @media screen and (max-width: 500px) {
-    
+    .wallet-main{
+        display: flex;
+        justify-content: center;
+    }
     .main-width{
         margin: 0 5vw;
         width: 80vw;

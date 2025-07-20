@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { empty } from 'rxjs';
+import { Expense } from '../../Expense';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,8 @@ export class Wallet_chartsService {
 
   data: Array<Array<number>> = [this.Incoming, this.Bills, this.Food, 
     this.Transportation, this.CreditCard, this.Others];
+
+  formData: Array<Expense> = []
   
   // Verify category name and return index
   setCategoryToIndex(category: string){
@@ -54,8 +56,6 @@ export class Wallet_chartsService {
           }
 
           this.data[i][month] += value;
-
-          console.log(this.data[i]);
           break;
         }}
   }
@@ -69,24 +69,27 @@ export class Wallet_chartsService {
       return console.log('The category must be a string');
     }
 
-    let monthIndex: number = Number.parseInt(month);
+    const monthIndex: number = Number.parseInt(month);
 
     if(monthIndex < 0 || monthIndex > 11){
       return console.log('The month must be between 1 and 12');
     }
 
-    let categoryIndex: number = this.setCategoryToIndex(category);
+    const categoryIndex: number = this.setCategoryToIndex(category);
     this.addDataValue(value, categoryIndex, monthIndex);
+  }
+
+  setFormData(name: string, value: number, category: string, date: string){
+    this.formData.push({name: name, amount: value, category: category, date: date})
+  }
+
+  getFormData(){
+    return this.formData
   }
 
   // Remove data from data Array
   removeData(){
-    for (let i = 0; i < this.data.length; i++) {
-      const dataArray = this.data[i];
-      for (let index = 0; index < dataArray.length; index++) {
-        dataArray[index] = 0
-      }
-    }
+    throw new Error('Method not implemented.');
   }
 
   // Create new category

@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { Wallet_chartsService } from '../Wallet_charts/Wallet_charts.service';
 import { DateFormatService } from '../../DateFormat.service';
 
@@ -9,35 +10,59 @@ import { DateFormatService } from '../../DateFormat.service';
   host: {
     class: 'm-auto'
   },
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   styleUrls: ['./CreateExpense.component.css']
 })
 export class CreateExpenseComponent {
+    name?: string;
+    category?: string;
+    value?: number;
+    date?: string; 
 
   chartService = inject(Wallet_chartsService)
   dateFormat = inject(DateFormatService)
 
+  dateNow?: Date;
+  hasName: boolean = false;
+
   addData(){
-    let name: string;
-    let category: string;
-    let value: number;
-    let date: string;
+    this.dateNow = new Date();
 
-    name = (document.getElementById('name') as HTMLInputElement).value;
-    category = (document.getElementById('category') as HTMLInputElement).value;
-    value = Number((document.getElementById('amount') as HTMLInputElement).value);
-    date = (document.getElementById('date') as HTMLInputElement).value;
+    // Get the reference of the form elements
+    this.name = (document.getElementById('name') as HTMLInputElement).value;
+    this.category = (document.getElementById('category') as HTMLInputElement).value;
+    this.value = Number((document.getElementById('amount') as HTMLInputElement).value);
+    this.date = (document.getElementById('date') as HTMLInputElement).value;
 
-    if(name == '' || category == '' || value == 0 || date == ''){
-      return;
+    if(this.name == '' || this.value == 0){
+      let button = document.getElementById('submitButton') as HTMLButtonElement;
+
+      button.disabled = true;
+      this.hasName = true;
+      return
     }
+    
+    // IF date is not empty convert to the right format
+    // ELSE set the date to the current date
+    if(this.date !== ''){
+      let dateParsed = Date.parse(this.date);
+      let dateFormated = new Date(dateParsed);
 
-    let dateParse = Date.parse(date);
-    let dateFormated = new Date(dateParse);
+      dateFormated.setDate(dateFormated.getDate() + 1);
+      
+      let dateMonth = this.dateFormat.getMonth(dateFormated);
+      this.date = this.dateFormat.formatDate(dateFormated);
 
-    let dateMonth = this.dateFormat.getMonth(dateFormated);
+      this.chartService.setData(this.value, dateMonth, this.category);
+      this.chartService.setFormData(this.name, this.value, this.category, this.date);
+      
+    } else {
+      let dateMonth = this.dateFormat.getMonth(this.dateNow);
 
-    this.chartService.setData(value, dateMonth, category);
+      this.date = this.dateFormat.formatDate(this.dateNow);
+
+      this.chartService.setData(this.value, dateMonth, this.category);
+      this.chartService.setFormData(this.name, this.value, this.category, this.date);
+    }
   }
-
 }

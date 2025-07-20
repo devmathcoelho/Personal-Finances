@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HttpRequestsService } from './Home/HttpRequests.service';
 @Component({
@@ -7,8 +7,7 @@ import { HttpRequestsService } from './Home/HttpRequests.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'Client_Side';
+export class AppComponent implements OnInit{
   width: number = window.screen.width;
   selected?: string;
 
@@ -30,4 +29,11 @@ export class AppComponent {
     }
   }
 
+  ngOnInit(){
+    this.selected = window.location.pathname.substring(1);
+
+    if(this.selected == 'add-expense-revenue'){
+      this.selected = 'wallet';
+    }
+  }
 }

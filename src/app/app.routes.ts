@@ -3,6 +3,8 @@ import { LoginComponent } from './Login/Login.component';
 import { HomeComponent } from './Home/Home.component';
 import { WalletComponent } from './Wallet/Wallet.component';
 import { CreateExpenseComponent } from './Wallet/CreateExpense/CreateExpense.component';
+import { HelpComponent } from './Help/Help.component';
+import { SettingsComponent } from './Settings/Settings.component';
 
 export const routes: Routes = [
     {
@@ -14,12 +16,20 @@ export const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: 'home',
+        path: 'dashboard',
         component: HomeComponent
     },
     {
         path: 'wallet',
         component: WalletComponent
+    },
+    {
+        path: 'help',
+        component: HelpComponent
+    },
+    {
+        path: 'settings',
+        component: SettingsComponent
     },
     {
         path: 'add-expense-revenue',

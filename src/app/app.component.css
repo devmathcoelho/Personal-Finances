@@ -11,7 +11,7 @@
 }
 
 .main-grid{
-    grid-template-columns: 0.5fr 0 1fr;
+    grid-template-columns: 0.2fr 1fr;
 }
 
 ul li:hover{

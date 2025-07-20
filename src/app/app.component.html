@@ -15,7 +15,7 @@
 
                 <ul class="d-flex flex-column gap-3 list-unstyled">
                     <li class="ps-4 p-2 rounded-3" [class.selected]="selected == 'dashboard'">
-                        <a routerLink="/home" (click)="changeSelected('dashboard')" class="d-flex gap-3 link text-light">
+                        <a (click)="changeSelected('dashboard')" routerLink="/dashboard" class="d-flex gap-3 link text-light">
                             <i class="bi bi-house"></i>
                             Dashboard
                         </a>
@@ -42,14 +42,14 @@
 
 
                 <ul class="d-flex flex-column gap-3 list-unstyled border-top border-dark pt-4">
-                    <li class="ps-4 p-2 rounded-3">
-                        <a class="d-flex gap-3 link text-light">
+                    <li class="ps-4 p-2 rounded-3" [class.selected]="selected == 'settings'">
+                        <a (click)="changeSelected('settings')" routerLink="settings" class="d-flex gap-3 link text-light">
                             <i class="bi bi-gear"></i>
                             Settings
                         </a>
                     </li>
-                    <li class="ps-4 p-2 rounded-3">
-                        <a href="" class="d-flex gap-3 link text-light">
+                    <li class="ps-4 p-2 rounded-3" [class.selected]="selected == 'help'">
+                        <a (click)="changeSelected('help')" routerLink="/help" class="d-flex gap-3 link text-light">
                             <i class="bi bi-question-circle"></i>
                             Help
                         </a>
