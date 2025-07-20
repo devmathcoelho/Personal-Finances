@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Expense } from '../Expense';
 import { DateFormatService } from '../DateFormat.service';
-import { Wallet_chartsComponent } from './Wallet_charts/Wallet_charts.component';
 import { RouterLink } from '@angular/router';
 import { Wallet_chartsService } from './Wallet_charts/Wallet_charts.service';
 @Component({
@@ -11,7 +10,7 @@ import { Wallet_chartsService } from './Wallet_charts/Wallet_charts.service';
   host: {
     class: 'wallet-main'
   },
-  imports: [Wallet_chartsComponent, RouterLink]
+  imports: [RouterLink]
 })
 export class WalletComponent {
   chartService = inject(Wallet_chartsService);

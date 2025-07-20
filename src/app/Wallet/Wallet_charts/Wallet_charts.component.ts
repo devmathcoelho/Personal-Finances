@@ -4,9 +4,9 @@ import { Wallet_chartsService } from './Wallet_charts.service';
 
 @Component({
   selector: 'app-wallet_chart',
-  templateUrl: './wallet_charts.component.html',
+  templateUrl: './Wallet_charts.component.html',
   imports: [BaseChartDirective],
-  styleUrls: ['./wallet_charts.component.css']
+  styleUrls: ['./Wallet_charts.component.css']
 })
 export class Wallet_chartsComponent {
 
