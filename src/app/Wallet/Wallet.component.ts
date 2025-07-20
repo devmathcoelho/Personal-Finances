@@ -3,6 +3,7 @@ import { Expense } from '../Expense';
 import { DateFormatService } from '../DateFormat.service';
 import { RouterLink } from '@angular/router';
 import { Wallet_chartsService } from './Wallet_charts/Wallet_charts.service';
+import { Wallet_chartsComponent } from "./Wallet_charts/Wallet_charts.component";
 @Component({
   selector: 'app-Wallet',
   templateUrl: './Wallet.component.html',
@@ -10,7 +11,7 @@ import { Wallet_chartsService } from './Wallet_charts/Wallet_charts.service';
   host: {
     class: 'wallet-main'
   },
-  imports: [RouterLink]
+  imports: [RouterLink, Wallet_chartsComponent]
 })
 export class WalletComponent {
   chartService = inject(Wallet_chartsService);
