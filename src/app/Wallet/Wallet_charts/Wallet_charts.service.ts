@@ -5,14 +5,14 @@ import { Expense } from '../../Expense';
   providedIn: 'root'
 })
 export class Wallet_chartsService {
-  Incoming: Array<number> = []
+  Income: Array<number> = []
   Bills: Array<number> = []
   Food: Array<number> = []
   Transportation: Array<number> = []
   CreditCard: Array<number> = []
   Others: Array<number> = []
 
-  data: Array<Array<number>> = [this.Incoming, this.Bills, this.Food, 
+  data: Array<Array<number>> = [this.Income, this.Bills, this.Food, 
     this.Transportation, this.CreditCard, this.Others];
 
   formData: Array<Expense> = []
@@ -22,7 +22,7 @@ export class Wallet_chartsService {
     let categoryIndex: number
 
     switch(category){
-      case 'Incoming':
+      case 'Income':
         categoryIndex = 0
         return categoryIndex;
       case 'Bills':

@@ -17,6 +17,10 @@ export class AppComponent implements OnInit{
 
   changeSelected(selected: string){
     this.selected = selected;
+
+    if(this.width < 600){
+      this.toggleSidebar();
+    }
   }
 
   toggleSidebar(){

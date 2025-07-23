@@ -1,0 +1,22 @@
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    padding: 10%;
+}
+
+@media screen and (min-width: 1200px) {
+    .max-width{
+        margin-top: 5%;
+        max-width: 60vw;
+    }
+    .margin-pc{
+        padding: 0;
+    }
+}
+@media screen and (max-width: 500px) {
+    .card{
+        padding: 5%;
+        margin-top: 10%;
+    }
+}

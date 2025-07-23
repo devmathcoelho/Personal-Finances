@@ -27,10 +27,7 @@ form{
     #search{
         width: 100%;
     }
-
-    app-wallet_chart{
-        display: none;
-    }
+    
     .input-group{
         display: flex;
         flex-direction: column;

@@ -17,7 +17,7 @@ export class Wallet_chartsComponent {
              'August', 'September', 'October', 'November', 'December'],
     datasets: [{
       label: 'Income',
-      data: this.chartService.Incoming,
+      data: this.chartService.Income,
       borderWidth: 2
     },
     {
