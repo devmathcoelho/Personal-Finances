@@ -12,37 +12,50 @@
             <!-- Payables -->
             <div class="card bg-primary text-light border border-light">
             <div class="d-flex justify-content-between align-items-center">
-                <h4>Payables</h4>
-                <a class="">
+                <h4>Bills This Month</h4>
+                <a>
                     <i class="bi bi-plus"></i>
                 </a>
             </div>
             <ul class="list-unstyled mt-2">
-                <li>💡 $202.98 - Electricity</li>
-                <li>🏠 $3,030.98 - Rent</li>
+                @for (i of this.billsService.bills.slice(0, 15); track $index) {
+                    <li>
+                    <a class="text-light arrow"
+                        (click)="changeSelected('wallet')">
+                        <i class="bi bi-bank"></i>
+                    </a>
+                    {{ 
+                        "R$" + i.amount + 
+                        " - " + i.name
+                    }}
+                    </li>
+                }
             </ul>
             </div>
         </div>
         <!-- Transactions -->
         <div class="col-md-6 col-lg-6">
             <div class="card bg-primary text-light border border-light">
-            <h4>Transactions</h4>
+            <h4>Recent Transactions</h4>
             <ul class="list-unstyled mt-2">
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
-                <li>🛒 Shopping - Nov 25 - R$ 300</li>
+                 @for (i of this.walletService.totalWallet.slice(0, 15); track $index) {
+                    <li>
+                    <a routerLink="/wallet" class="text-light arrow"
+                        (click)="changeSelected('wallet')">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    {{ 
+                        i.name + " - " +
+                        "R$" + i.amount
+                    }}
+                    </li>
+                }
+                @if (this.walletService.totalWallet.length > 0) {
+                    <li><a routerLink="/wallet" 
+                        (click)="changeSelected('wallet')" 
+                        class="text-light link">...more</a>
+                    </li>
+                }
             </ul>
             </div>
         </div>

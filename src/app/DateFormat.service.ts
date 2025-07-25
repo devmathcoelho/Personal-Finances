@@ -12,6 +12,13 @@ export class DateFormatService {
   
     return `${day}/${monthString}/${year}`;
   }
+
+  formatStringToDate(date: string){
+    let dateParsed = Date.parse(date);
+    let dateFormated = new Date(dateParsed);
+    
+    return dateFormated
+  }
   
   getMonth(date: Date): string {
     const month = (date.getMonth()).toString().padStart(2, '0');

@@ -4,6 +4,7 @@ import { DateFormatService } from '../DateFormat.service';
 import { RouterLink } from '@angular/router';
 import { Wallet_chartsService } from './Wallet_charts/Wallet_charts.service';
 import { Wallet_chartsComponent } from "./Wallet_charts/Wallet_charts.component";
+import { WalletService } from './Wallet.service';
 @Component({
   selector: 'app-Wallet',
   templateUrl: './Wallet.component.html',
@@ -15,15 +16,15 @@ import { Wallet_chartsComponent } from "./Wallet_charts/Wallet_charts.component"
 })
 export class WalletComponent {
   chartService = inject(Wallet_chartsService);
-  dateFormat = inject(DateFormatService)
-  width: number = window.screen.width;
+  dateFormat = inject(DateFormatService);
+  walletService = inject(WalletService);
 
-  totalWallet: Array<Expense> = [];
+  width: number = window.screen.width;
 
   constructor(){
     // totalWallet receives the array of formData
-    this.totalWallet = this.chartService.getFormData();
-    this.totalWallet = this.sortWalletByDate(this.totalWallet);
+    this.walletService.totalWallet = this.chartService.getFormData();
+    this.walletService.totalWallet = this.sortWalletByDate(this.walletService.totalWallet);
   }
 
   checkAmount(amount: number): boolean {

@@ -39,14 +39,14 @@
       </thead>
 
       <tbody class="table-group-divider">
-          @for (i of totalWallet; track $index) {
+          @for (i of this.walletService.totalWallet; track $index) {
             <tr>
-              <td>{{totalWallet[$index].name}}</td>
-              <td class="bg-{{ totalWallet[$index].amount < 0 ? 'danger' : 'success' }}">
-                  {{totalWallet[$index].amount}}
+              <td>{{i.name}}</td>
+              <td class="bg-{{i.amount < 0 ? 'danger' : 'success' }}">
+                  {{i.amount}}
               </td>
-              <td>{{totalWallet[$index].category}}</td>
-              <td>{{totalWallet[$index].date}}</td>
+              <td>{{i.category}}</td>
+              <td>{{i.date}}</td>
             </tr>
           }
         </tbody>

@@ -45,8 +45,7 @@ export class CreateExpenseComponent {
     // IF date is not empty convert to the right format
     // ELSE set the date to the current date
     if(this.date !== ''){
-      let dateParsed = Date.parse(this.date);
-      let dateFormated = new Date(dateParsed);
+      let dateFormated = this.dateFormat.formatStringToDate(this.date)
 
       dateFormated.setDate(dateFormated.getDate() + 1);
       
