@@ -13,6 +13,14 @@ export class DateFormatService {
     return `${day}/${monthString}/${year}`;
   }
 
+  formatDateWithoutYear(date: Date): string {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = date.getMonth() + 1;
+    const monthString = month.toString().padStart(2, '0');
+  
+    return `${day}/${monthString}`;
+  }
+
   formatStringToDate(date: string){
     let dateParsed = Date.parse(date);
     let dateFormated = new Date(dateParsed);

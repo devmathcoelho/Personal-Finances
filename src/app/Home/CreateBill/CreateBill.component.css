@@ -1,0 +1,10 @@
+.max-width{
+    width: 40vw !important;
+    margin: 25vh auto;
+}
+
+@media screen and (max-width: 800px) {
+    .max-width{
+        width: 90vw !important;
+    }
+}

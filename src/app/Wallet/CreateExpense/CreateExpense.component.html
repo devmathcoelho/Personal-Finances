@@ -1,11 +1,12 @@
 <form #myForm="ngForm" class="main-size">
   <p class="text-danger text-center m-1" [class.d-none]="hasName">Please insert Name and Value</p>
 
-  <div class="">
+  <div>
     <label for="name" required class="form-label" #nameInput>Name</label>
     <input type="text" class="form-control border border-light bg-dark text-light" id="name">
   </div>
-  <div class="">
+
+  <div>
     <label for="category" class="form-label">Category</label>
     <select class="form-select border border-light bg-dark text-light" id="category">
       <option value="Income">Income</option>
@@ -16,14 +17,17 @@
       <option value="Other">Other</option>
     </select>
   </div>
-  <div class="">
+
+  <div>
     <label for="amount" class="form-label" #amountInput>Amount</label>
     <input type="number" required class="form-control border border-light bg-dark text-light" id="amount">
   </div>
-  <div class="">
+
+  <div>
     <label for="date" class="form-label">Date</label>
     <input type="date" class="form-control border border-light bg-dark text-light" id="date">
   </div>
+  
   <button type="submit" routerLink="/wallet" (click)="this.addData()" class="btn btn-secondary mt-3 me-2">Create</button>
   <button type="submit" routerLink="/wallet" (click)="chartService.removeData()" class="btn btn-primary mt-3">Go Back</button>
 </form>

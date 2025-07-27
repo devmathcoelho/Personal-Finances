@@ -5,6 +5,7 @@ import { WalletComponent } from './Wallet/Wallet.component';
 import { CreateExpenseComponent } from './Wallet/CreateExpense/CreateExpense.component';
 import { HelpComponent } from './Help/Help.component';
 import { SettingsComponent } from './Settings/Settings.component';
+import { CreateBillComponent } from './Home/CreateBill/CreateBill.component';
 
 export const routes: Routes = [
     {
@@ -32,7 +33,11 @@ export const routes: Routes = [
         component: SettingsComponent
     },
     {
-        path: 'add-expense-revenue',
+        path: 'add-expense',
         component: CreateExpenseComponent
+    },
+    {
+        path: 'add-bill',
+        component: CreateBillComponent
     }
 ];

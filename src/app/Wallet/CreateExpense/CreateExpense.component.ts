@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Wallet_chartsService } from '../Wallet_charts/Wallet_charts.service';
 import { DateFormatService } from '../../DateFormat.service';
+import { WalletService } from '../Wallet.service';
 
 @Component({
   selector: 'app-CreateExpense',
@@ -14,12 +15,13 @@ import { DateFormatService } from '../../DateFormat.service';
   styleUrls: ['./CreateExpense.component.css']
 })
 export class CreateExpenseComponent {
-    name?: string;
-    category?: string;
-    value?: number;
-    date?: string; 
+  name?: string;
+  category?: string;
+  value?: number;
+  date?: string; 
 
   chartService = inject(Wallet_chartsService)
+  walletService = inject(WalletService)
   dateFormat = inject(DateFormatService)
 
   dateNow?: Date;
@@ -54,6 +56,10 @@ export class CreateExpenseComponent {
 
       this.chartService.setData(this.value, dateMonth, this.category);
       this.chartService.setFormData(this.name, this.value, this.category, this.date);
+
+      this.walletService.setTotalAmount();
+      this.walletService.setTotalIncomes();
+      this.walletService.setTotalExpenses();
       
     } else {
       let dateMonth = this.dateFormat.getMonth(this.dateNow);
@@ -62,6 +68,10 @@ export class CreateExpenseComponent {
 
       this.chartService.setData(this.value, dateMonth, this.category);
       this.chartService.setFormData(this.name, this.value, this.category, this.date);
+      
+      this.walletService.setTotalAmount();
+      this.walletService.setTotalIncomes();
+      this.walletService.setTotalExpenses();
     }
   }
 }

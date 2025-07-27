@@ -4,16 +4,20 @@
             <div class="col-md-6 col-lg-6  d-grid gap-3">
             <!-- Wallet -->
             <div class="d-flex justify-content-center card bg-primary text-center text-light border border-light">
-                <h4>$4,523.98</h4>
-                <p class="text-success mb-0">↑ $3,030.98</p>
-                <p class="text-danger">↓ $223.98</p>
+                <h4 [className]="{
+                    'text-success': this.walletService.totalAmount > 0, 
+                    'text-danger': this.walletService.totalAmount < 0}">
+                    R${{ this.walletService.totalAmount}}
+                </h4>
+                <p class="text-success mb-0">↑ R${{ this.walletService.totalIncomes }}</p>
+                <p class="text-danger">↓ R${{ this.walletService.totalExpenses }}</p>
             </div>
 
             <!-- Payables -->
             <div class="card bg-primary text-light border border-light">
             <div class="d-flex justify-content-between align-items-center">
                 <h4>Bills This Month</h4>
-                <a>
+                <a routerLink="/add-bill" class="text-light">
                     <i class="bi bi-plus"></i>
                 </a>
             </div>
@@ -26,7 +30,8 @@
                     </a>
                     {{ 
                         "R$" + i.amount + 
-                        " - " + i.name
+                        " - " + i.name + 
+                        " - " + i.date
                     }}
                     </li>
                 }
@@ -51,9 +56,12 @@
                     </li>
                 }
                 @if (this.walletService.totalWallet.length > 0) {
-                    <li><a routerLink="/wallet" 
-                        (click)="changeSelected('wallet')" 
-                        class="text-light link">...more</a>
+                    <li>
+                        @if (this.walletService.totalWallet.length > 15) {
+                            <a routerLink="/wallet" 
+                            (click)="changeSelected('wallet')" 
+                            class="text-light link">...more</a>
+                        }
                     </li>
                 }
             </ul>

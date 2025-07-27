@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HttpRequestsService } from './Home/HttpRequests.service';
+import { WalletService } from './Wallet/Wallet.service';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink],
@@ -12,6 +13,7 @@ export class AppComponent implements OnInit{
   selected?: string;
 
   httpService = inject(HttpRequestsService);
+  walletService = inject(WalletService);
 
   isAuthenticated = this.httpService.isAuthenticated;
 
@@ -35,6 +37,9 @@ export class AppComponent implements OnInit{
 
   ngOnInit(){
     this.selected = window.location.pathname.substring(1);
+    this.walletService.setTotalAmount();
+    this.walletService.setTotalIncomes();
+    this.walletService.setTotalExpenses();
 
     if(this.selected == 'add-expense-revenue'){
       this.selected = 'wallet';
