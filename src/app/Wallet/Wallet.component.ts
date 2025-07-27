@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { Expense } from '../Expense';
 import { DateFormatService } from '../DateFormat.service';
 import { RouterLink } from '@angular/router';
 import { Wallet_chartsService } from './Wallet_charts/Wallet_charts.service';

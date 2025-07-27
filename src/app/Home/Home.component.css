@@ -1,3 +1,7 @@
+.mt-pc{
+    margin-top: 5%;
+}
+
 .card {
     border: none;
     border-radius: 16px;
@@ -26,6 +30,10 @@
     }
 }
 @media screen and (max-width: 500px) {
+    .mt-pc{
+        margin-top: 0;
+    }
+
     .card{
         padding: 5%;
         margin-top: 10%;

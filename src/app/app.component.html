@@ -32,8 +32,8 @@
                             Transactions
                         </a>
                     </li>
-                    <li class="ps-4 p-2 rounded-3">
-                        <a class="d-flex gap-3 link text-light">
+                    <li class="ps-4 p-2 rounded-3" [class.selected]="selected == 'search'">
+                        <a (click)="changeSelected('search')" class="d-flex gap-3 link text-light">
                             <i class="bi bi-search"></i>
                             Search
                         </a>

@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Expense } from '../Expense';
+import { DateFormatService } from '../DateFormat.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ export class WalletService {
   totalIncomes: number = 0;
   totalExpenses: number = 0;
   totalWallet: Array<Expense> = [];
+
+  dateFormat = inject(DateFormatService)
 
   setTotalAmount() {
     for (let i = 0; i < this.totalWallet.length; i++) {

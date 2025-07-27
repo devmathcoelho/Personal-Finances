@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { HttpRequestsService } from './Home/HttpRequests.service';
+import { HttpRequestsService } from './HttpRequests.service';
 import { WalletService } from './Wallet/Wallet.service';
 @Component({
   selector: 'app-root',
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit{
     this.walletService.setTotalIncomes();
     this.walletService.setTotalExpenses();
 
-    if(this.selected == 'add-expense-revenue'){
+    if(this.selected == 'add-expense'){
       this.selected = 'wallet';
     }
   }

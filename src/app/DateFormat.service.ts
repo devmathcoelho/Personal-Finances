@@ -21,7 +21,7 @@ export class DateFormatService {
     return `${day}/${monthString}`;
   }
 
-  formatStringToDate(date: string){
+  formatStringToDate(date: string): Date{
     let dateParsed = Date.parse(date);
     let dateFormated = new Date(dateParsed);
     

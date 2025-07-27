@@ -2,15 +2,15 @@
   <form #myForm="ngForm">
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" required>
+      <input type="text" class="form-control border border-light bg-dark text-light" id="name" required>
     </div>
     <div class="mb-3">
       <label for="amount" class="form-label">Amount</label>
-      <input type="number" class="form-control" id="amount" required>
+      <input type="number" class="form-control border border-light bg-dark text-light" id="amount" required>
     </div>
     <div class="mb-3">
       <label for="date" class="form-label">Date</label>
-      <input type="date" class="form-control" id="date" required>
+      <input type="date" class="form-control border border-light bg-dark text-light" id="date" required>
     </div>
     <button type="submit" routerLink="/dashboard" (click)="setBill()" class="btn btn-secondary">Create</button>
   </form>
