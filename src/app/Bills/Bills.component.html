@@ -1,0 +1,35 @@
+<main class="main-width d-flex flex-column align-items-center mt-5">
+  <div class="w-100">
+    <app-Bills_Chart/>
+
+    <table class="table table-bordered table-dark table-hover text-center mt-5">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody class="table-group-divider">
+        @for (i of this.billsService.bills; track $index) {
+          <tr>
+            <td>{{i.name}}</td>
+            <td>{{i.amount}}</td>
+            <td>{{i.date}}</td>
+            <td>
+              <button class="btn btn-success me-1 text-light">
+                <i class="bi bi-clipboard-check"></i>
+              </button>
+
+              <button class="btn btn-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</main>

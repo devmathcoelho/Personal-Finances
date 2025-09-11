@@ -26,16 +26,16 @@
                             Wallet
                         </a>
                     </li>
-                    <li class="ps-4 p-2 rounded-3" [class.selected]="selected == 'transactions'">
-                        <a (click)="changeSelected('transactions')" class="d-flex gap-3 link text-light">
+                    <li class="ps-4 p-2 rounded-3" [class.selected]="selected == 'bills'">
+                        <a (click)="changeSelected('bills')" routerLink="/bills" class="d-flex gap-3 link text-light">
                             <i class="bi bi-clipboard-minus"></i>
-                            Transactions
+                            Bills
                         </a>
                     </li>
-                    <li class="ps-4 p-2 rounded-3" [class.selected]="selected == 'search'">
-                        <a (click)="changeSelected('search')" class="d-flex gap-3 link text-light">
+                    <li class="ps-4 p-2 rounded-3" [class.selected]="selected == 'callai'">
+                        <a (click)="changeSelected('callai')" routerLink="/callai" class="d-flex gap-3 link text-light">
                             <i class="bi bi-search"></i>
-                            Search
+                            Call Ai
                         </a>
                     </li>
                 </ul>

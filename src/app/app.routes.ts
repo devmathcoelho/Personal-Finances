@@ -5,7 +5,8 @@ import { WalletComponent } from './Wallet/Wallet.component';
 import { CreateExpenseComponent } from './Wallet/CreateExpense/CreateExpense.component';
 import { HelpComponent } from './Help/Help.component';
 import { SettingsComponent } from './Settings/Settings.component';
-import { CreateBillComponent } from './Home/CreateBill/CreateBill.component';
+import { BillsComponent } from './Bills/Bills.component';
+import { CreateBillComponent } from './Bills/CreateBill/CreateBill.component';
 
 export const routes: Routes = [
     {
@@ -23,6 +24,14 @@ export const routes: Routes = [
     {
         path: 'wallet',
         component: WalletComponent
+    },
+    {
+        path: 'callai',
+        component: WalletComponent
+    },
+    {
+        path: 'bills',
+        component: BillsComponent
     },
     {
         path: 'help',

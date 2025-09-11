@@ -1,0 +1,29 @@
+.main-width{
+    width: 52vw;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 800px) {
+    .main-width{
+        width: 80vw;
+    }
+    
+}
+
+@media screen and (max-width: 500px) {
+    .main-width{
+        width: 80vw;
+    }
+    th {
+        display: none;
+    }
+    tr{
+        border-top: 0.1rem solid #fff;
+    }
+    td {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 0.7rem;
+    }
+}

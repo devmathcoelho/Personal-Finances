@@ -8,6 +8,20 @@ import { DateFormatService } from '../DateFormat.service';
 export class BillsService {
   dateFormat = inject(DateFormatService);
   bills: Array<Bill> = []
+  billsChart: Array<number> = []
+
+  // Add value data Array on corresponding index
+  addDataValue(value: number, month: number){
+    for (let i = 0; i < this.billsChart.length; i++) {
+      if(this.billsChart[i] == month){
+        this.billsChart[i] += value
+        break;
+      } else {
+        this.billsChart[month] = 0
+        break;
+      }
+    }
+  }
 
   sortBillsByDate(){
     this.bills.sort((a, b) => {
@@ -20,6 +34,9 @@ export class BillsService {
   // Add a new bill to Bills Array
   setBill(bill: Bill){
     if(bill.name === "" || bill.amount === 0 || bill.date === "") return
+
+    const date = parseInt(bill.date.replace(/^(\d{2})\/(\d{2})$/, '$2'));
+    this.addDataValue(bill.amount, date)
 
     this.bills.push(bill)
   }

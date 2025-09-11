@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { BillsService } from '../Bills.service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { DateFormatService } from '../../DateFormat.service';
+import { BillsService } from '../../Home/Bills.service';
 
 @Component({
   selector: 'app-CreateBill',
@@ -36,7 +36,8 @@ export class CreateBillComponent {
     this.billService.setBill({
       name: this.name,
       amount: this.value,
-      date: this.date
+      date: this.date,
+      createdAt: new Date()
     })
   }
 }

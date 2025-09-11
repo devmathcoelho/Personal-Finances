@@ -1,5 +1,6 @@
 export type Bill = {
     name: string,
     amount: number,
-    date: string
+    date: string,
+    createdAt: Date
 }

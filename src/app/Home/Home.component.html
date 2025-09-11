@@ -1,15 +1,15 @@
 <main class="max-width mx-auto">
     <div class="container-fluid margin-pc">
         <div class="row">
-            <div class="col-md-6 col-lg-6 d-grid">
             <!-- Wallet -->
-            <div class="d-flex justify-content-center card bg-primary text-center text-light border border-light">
-                <h4 class="text-{{this.walletService.totalAmount < 0 ? 'danger' : 'success' }}">
-                    R${{ this.walletService.totalAmount}}
-                </h4>
-                <p class="text-success mb-0">↑ R${{ this.walletService.totalIncomes }}</p>
-                <p class="text-danger">↓ R${{ this.walletService.totalExpenses }}</p>
-            </div>
+            <div class="col-md-6 col-lg-6 d-grid">
+                <div class="d-flex justify-content-center card bg-primary text-center text-light border border-light">
+                    <h4 class="text-{{this.walletService.totalAmount < 0 ? 'danger' : 'success' }}">
+                        R${{ this.walletService.totalAmount}}
+                    </h4>
+                    <p class="text-success mb-0">↑ R${{ this.walletService.totalIncomes }}</p>
+                    <p class="text-danger">↓ R${{ this.walletService.totalExpenses }}</p>
+                </div>
 
             <!-- Bills -->
             <div class="card bg-primary text-light border border-light mt-pc">
@@ -33,6 +33,14 @@
                         }}
                         </li>
                     }
+                    @if (this.billsService.bills.length > 15) {
+                    <li>
+                        <a routerLink="/bills" 
+                            (click)="changeSelected('bills')" 
+                            class="text-light link">...more
+                        </a>
+                    </li>
+                }
                 </ul>
                 </div>
             </div>
@@ -65,6 +73,6 @@
             </ul>
             </div>
         </div>
-        </div>
+    </div>
     </div>
 </main>
