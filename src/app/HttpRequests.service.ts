@@ -9,7 +9,7 @@ import { Expense } from './Expense';
   providedIn: 'root'
 })
 export class HttpRequestsService {
-  private ApiUrl = 'https://localhost:7108';
+  private ApiUrl = 'http://simplefinances.somee.com';
   private http = inject(HttpClient);
 
   private userSubject = new BehaviorSubject<User | null>(null);
