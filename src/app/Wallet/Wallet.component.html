@@ -34,21 +34,27 @@
             <th>Amount</th>
             <th>Category</th>
             <th>Date</th>
+            <th>Actions</th>
           </tr>
       </thead>
 
       <tbody class="table-group-divider">
-          @for (i of this.walletService.totalWallet; track $index) {
-            <tr>
-              <td>{{i.name}}</td>
-              <td class="bg-{{i.amount < 0 ? 'danger' : 'success' }}">
-                  {{i.amount}}
-              </td>
-              <td>{{i.category}}</td>
-              <td>{{i.date}}</td>
-            </tr>
-          }
-        </tbody>
+        @for (i of (httpService.user$ | async)?.expenses; track $index) {
+          <tr>
+            <td>{{i.name}}</td>
+            <td class="text-{{i.category == 'Income' ? 'success' : 'danger' }}">
+                R$ {{i.category == 'Income' ? '' : '-'}}{{i.value}}
+            </td>
+            <td>{{i.category}}</td>
+            <td>{{i.date}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="this.httpService.deleteExpense(i)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
     </table>
   </div>
 </main>

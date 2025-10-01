@@ -1,9 +1,13 @@
-import { Expense } from "./Expense"
+import { Expense, Revenue } from "./Expense"
 import { Bill } from "./Home/Bill"
 
 export type User = {
+    id: number,
     name: string,
+    totalBalance: number,
+    totalRevenue: number,
+    totalExpense: number,
     expenses: Expense[],
-    bills: Bill[],
-    CreatedAt: string
+    revenues: Revenue[],
+    bills: Bill[]
 }

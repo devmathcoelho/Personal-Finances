@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Expense } from '../../Expense';
+import { HttpRequestsService } from '../../HttpRequests.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Wallet_chartsService {
+  httpService = inject(HttpRequestsService)
+
   Income: Array<number> = []
   Bills: Array<number> = []
   Food: Array<number> = []
@@ -15,7 +18,13 @@ export class Wallet_chartsService {
   data: Array<Array<number>> = [this.Income, this.Bills, this.Food, 
     this.Transportation, this.CreditCard, this.Others];
 
-  formData: Array<Expense> = []
+  dataHomeChart: Array<number> = [5, 5, 5, 5, 5 ,5]
+
+  formData: Array<Expense> = [];
+
+  constructor() { 
+    this.formData = this.httpService.userAuth!.expenses
+  }
   
   // Verify category name and return index
   setCategoryToIndex(category: string){
@@ -77,19 +86,6 @@ export class Wallet_chartsService {
 
     const categoryIndex: number = this.setCategoryToIndex(category);
     this.addDataValue(value, categoryIndex, monthIndex);
-  }
-
-  setFormData(name: string, value: number, category: string, date: string){
-    this.formData.push({name: name, amount: value, category: category, date: date})
-  }
-
-  getFormData(){
-    return this.formData
-  }
-
-  // Remove data from data Array
-  removeData(){
-    throw new Error('Method not implemented.');
   }
 
   // Create new category

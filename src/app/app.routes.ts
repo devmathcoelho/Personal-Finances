@@ -10,10 +10,6 @@ import { CreateBillComponent } from './Bills/CreateBill/CreateBill.component';
 
 export const routes: Routes = [
     {
-        path: '',
-        component: HomeComponent
-    },
-    {
         path: 'login',
         component: LoginComponent
     },

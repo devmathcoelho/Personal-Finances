@@ -1,13 +1,15 @@
 export type Expense = {
+    id: number,
     name: string,
-    amount: number,
+    value: number,
     category: string,
-    date: string
+    date: string,
+    userId: number | undefined
 }
 
 export type Revenue = {
     name: string,
-    amount: number,
-    category: string,
-    date: string
+    value: number,
+    date: string,
+    userId: number | undefined
 }

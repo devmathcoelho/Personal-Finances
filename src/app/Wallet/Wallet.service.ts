@@ -1,40 +1,37 @@
 import { inject, Injectable } from '@angular/core';
 import { Expense } from '../Expense';
-import { DateFormatService } from '../DateFormat.service';
-
+import { HttpRequestsService } from '../HttpRequests.service';
 @Injectable({
   providedIn: 'root'
 })
 export class WalletService {
-  totalAmount: number = 0;
-  totalIncomes: number = 0;
-  totalExpenses: number = 0;
+  httpService = inject(HttpRequestsService)
+
+  private totalAmount: number = 0;
+  private totalIncomes: number = 0;
+  private totalExpenses: number = 0;
   totalWallet: Array<Expense> = [];
-
-  dateFormat = inject(DateFormatService)
-
-  setTotalAmount() {
-    for (let i = 0; i < this.totalWallet.length; i++) {
-      this.totalAmount += this.totalWallet[i].amount;
-    }
+  
+  getUserAmounts() {
+    this.totalAmount = this.httpService.userAuth!.totalBalance;
+    this.totalIncomes = this.httpService.userAuth!.totalRevenue;
+    this.totalExpenses = this.httpService.userAuth!.totalExpense;
+    
+    return { totalAmount: this.totalAmount, totalIncomes: this.totalIncomes, totalExpenses: this.totalExpenses };
+  }
+  
+  setTotalWallet() {
+  // totalWallet receives the array of formData
+    this.totalWallet = this.httpService.userAuth!.expenses;
+    this.totalWallet = this.sortArrayByDate(this.totalWallet);
   }
 
-  setTotalIncomes() {
-    this.totalIncomes = 0;
-    for (let i = 0; i < this.totalWallet.length; i++) {
-      if (this.totalWallet[i].amount > 0) {
-        this.totalIncomes += this.totalWallet[i].amount;
-      }
-    }
-  }
-
-  setTotalExpenses() {
-    for (let i = 0; i < this.totalWallet.length; i++) {
-      if (this.totalWallet[i].amount < 0) {
-        this.totalExpenses += this.totalWallet[i].amount;
-      }
-    }
-
-    this.totalExpenses = this.totalExpenses * -1;
+  // Sorts the wallet by date
+  sortArrayByDate(Array: Array<any>) {
+      return Array.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateB.getTime() - dateA.getTime();
+    });
   }
 }

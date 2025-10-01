@@ -2,9 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HttpRequestsService } from './HttpRequests.service';
 import { WalletService } from './Wallet/Wallet.service';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -16,6 +18,7 @@ export class AppComponent implements OnInit{
   walletService = inject(WalletService);
 
   isAuthenticated = this.httpService.isAuthenticated;
+  router = inject(Router);
 
   changeSelected(selected: string){
     this.selected = selected;
@@ -35,12 +38,18 @@ export class AppComponent implements OnInit{
     }
   }
 
+  async getUser(){
+    this.httpService.userAuth = await this.httpService.getUserData(this.httpService.userGetName);
+
+    this.walletService.setTotalWallet();
+    this.router.navigate(['/dashboard']);
+  }
+  
   ngOnInit(){
     this.selected = window.location.pathname.substring(1);
-    this.walletService.setTotalAmount();
-    this.walletService.setTotalIncomes();
-    this.walletService.setTotalExpenses();
-
+    
+    this.getUser();
+    
     if(this.selected == 'add-expense'){
       this.selected = 'wallet';
     }

@@ -10,8 +10,9 @@
 
 <div class="{{width > 700 ? 'd-grid' : 'd-block'}} min-vh-100 main-grid">
         <aside class="sidebar position-fixed border-end border-light">
+        @if (this.httpService.userAuth !== null) {
             <div class="d-flex flex-column justify-content-around fs-5 p-4 pt-2 h-100 bg-primary text-light">
-                <h2 class="text-center">Matheus Coelho</h2>
+                <h2 class="text-center">{{this.httpService.userAuth.name}}</h2>
 
                 <ul class="d-flex flex-column gap-3 list-unstyled">
                     <li class="ps-4 p-2 rounded-3" [class.selected]="selected == 'dashboard'">
@@ -69,6 +70,7 @@
                     </li>
                 </ul>
             </div>
+        }
         </aside>
     <router-outlet/>
 </div>

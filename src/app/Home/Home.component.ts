@@ -1,23 +1,56 @@
 import { Component, inject } from '@angular/core';
-import { HttpRequestsService } from '../HttpRequests.service';
 import { WalletService } from '../Wallet/Wallet.service';
 import { RouterLink } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { BillsService } from './Bills.service';
+import { BaseChartDirective } from 'ng2-charts';
+import { Wallet_chartsService } from '../Wallet/Wallet_charts/Wallet_charts.service';
+import { ChartData, ChartOptions } from 'chart.js/auto';
+import { HttpRequestsService } from '../HttpRequests.service';
 
 @Component({
   selector: 'app-Home',
   templateUrl: './Home.component.html',
-  imports: [RouterLink],
+  imports: [RouterLink, BaseChartDirective],
   styleUrls: ['./Home.component.css']
 })
 export class HomeComponent {
-  httpRequest = inject(HttpRequestsService);
   walletService = inject(WalletService);
+  walletChartService = inject(Wallet_chartsService);
+  httpService = inject(HttpRequestsService);
   app = inject(AppComponent);
   billsService = inject(BillsService);
+
+  userAmounts = this.walletService.getUserAmounts();
 
   changeSelected(selected: string) {
     this.app.changeSelected(selected);
   }
+
+  barChartData: ChartData<'pie', number[], string | string[]> = {
+  labels: ['Income', 'Bills', 'Food', 'Transportation', 'Credit Card', 'Others'],
+  datasets: [
+    {
+      data: this.walletChartService.dataHomeChart,
+      backgroundColor: [
+        '#36A2EB',
+        '#FF6384',
+        '#FFCE56',
+        '#4BC0C0',
+        '#9966FF',
+        '#FF9F40'
+      ]
+    }
+  ]
+};
+
+barChartOptions: ChartOptions<'pie'> = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top'
+    }
+  }
+};
+
 }
