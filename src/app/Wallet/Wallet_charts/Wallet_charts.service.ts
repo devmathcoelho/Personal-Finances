@@ -27,32 +27,33 @@ export class Wallet_chartsService {
   }
   
   // Verify category name and return index
-  setCategoryToIndex(category: string){
+  setCategoryToIndex(category: string) :number {
     let categoryIndex: number
 
     switch(category){
       case 'Income':
         categoryIndex = 0
-        return categoryIndex;
+        break
       case 'Bills':
         categoryIndex = 1
-        return categoryIndex;
+        break
       case 'Food':
         categoryIndex = 2
-        return categoryIndex;
+        break
       case 'Transportation':
         categoryIndex = 3
-        return categoryIndex;
+        break
       case 'Credit Card':
         categoryIndex = 4
-        return categoryIndex;
+        break
       case 'Others':
         categoryIndex = 5
-        return categoryIndex;
+        break
       default: 
         console.log('Category not found');
         return -1
-    }
+      }
+      return categoryIndex;
   }
 
   // Add value data Array on corresponding index
@@ -70,22 +71,13 @@ export class Wallet_chartsService {
   }
 
   // Call addDataValue and parse parameters
-  setData(value: number, month: string, category: string){
-    if(typeof month != 'string'){
-      return console.log('The month must be a string');
-    }
-    if(typeof category != 'string'){
-      return console.log('The category must be a string');
-    }
-
-    const monthIndex: number = Number.parseInt(month);
-
-    if(monthIndex < 0 || monthIndex > 11){
+  setData(value: number, month: number, category: string){
+    if(month < 0 || month > 11){
       return console.log('The month must be between 1 and 12');
     }
 
     const categoryIndex: number = this.setCategoryToIndex(category);
-    this.addDataValue(value, categoryIndex, monthIndex);
+    this.addDataValue(value, categoryIndex, month);
   }
 
   // Create new category

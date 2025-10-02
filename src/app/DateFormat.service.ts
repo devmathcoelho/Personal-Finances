@@ -6,11 +6,10 @@ import { Injectable } from '@angular/core';
 export class DateFormatService {
   formatDate(date: Date): string {
     const day = date.getDate().toString().padStart(2, '0');
-    const month = date.getMonth() + 1;
-    const monthString = month.toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
-  
-    return `${day}/${monthString}/${year}`;
+
+    return `${year}-${month}-${day}`; // ✅ ISO
   }
 
   formatDateWithoutYear(date: Date): string {
@@ -21,16 +20,19 @@ export class DateFormatService {
     return `${day}/${monthString}`;
   }
 
-  formatStringToDate(date: string): Date{
-    let dateParsed = Date.parse(date);
-    let dateFormated = new Date(dateParsed);
-    
-    return dateFormated
-  }
-  
-  getMonth(date: Date): string {
-    const month = (date.getMonth()).toString().padStart(2, '0');
+  formatStringToDate(date: string): Date {
+    // yyyy-mm-dd
+    if (date.includes('-')) {
+      const [year, month, day] = date.split('-').map(Number);
+      return new Date(year, month - 1, day);
+    }
 
-    return month
+    // dd/mm/yyyy
+    if (date.includes('/')) {
+      const [day, month, year] = date.split('/').map(Number);
+      return new Date(year, month - 1, day);
+    }
+
+    return new Date();
   }
 }

@@ -31,8 +31,9 @@ export class CreateExpenseComponent {
   dateFormat = inject(DateFormatService)
   httpService = inject(HttpRequestsService)
 
-  dateNow?: Date;
-  hasName: boolean = false;
+  dateNow: Date = new Date();
+  dateMonth: number = 0;
+  hasName: boolean = true;
   router: Router = inject(Router);
 
   addData(){
@@ -43,18 +44,34 @@ export class CreateExpenseComponent {
     this.expense.date = (document.getElementById('date') as HTMLInputElement).value;
     this.expense.userId = this.httpService.userAuth?.id
 
-    // if(this.expense.name == '' || this.expense.value == undefined){
-    //   let button = document.getElementById('submitButton') as HTMLButtonElement;
+    if(this.expense.date == '' || this.expense.date == null){ {
+      this.expense.date = this.dateFormat.formatDate(this.dateNow);
+    }
 
-    //   button.disabled = true;
-    //   this.hasName = true;
-    //   return
-    // }
+    if(this.expense.name == '' || this.expense.value == 0){
+      this.hasName = false;
+      this.expense.category = '';
+    }
 
     if(this.expense.category == 'Income'){
       this.httpService.setRevenue(this.expense);
-    } else {
+
+      // Send date to Chart
+      const dateFormated = this.dateFormat.formatStringToDate(this.expense.date);
+      this.dateMonth = dateFormated!.getMonth();
+      this.chartService.setData(this.expense.value, this.dateMonth, this.expense.category)
+
+      this.router.navigate(['/wallet']);
+
+    } else if (this.expense.category != '') {
       this.httpService.setExpense(this.expense);
+
+      // Send date to Chart
+      const dateFormated = this.dateFormat.formatStringToDate(this.expense.date);
+      this.dateMonth = dateFormated!.getMonth();
+      this.chartService.setData(this.expense.value, this.dateMonth, this.expense.category)
+
+      this.router.navigate(['/wallet']);
     }
   }
-}
+}}

@@ -2,6 +2,11 @@ form{
     margin-top: 2vh;
 }
 
+tbody td{
+    text-align: center;
+    vertical-align: middle;
+}
+
 .main-width{
     width: 52vw;
     margin: 0 auto;
