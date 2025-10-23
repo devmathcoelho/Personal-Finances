@@ -18,48 +18,34 @@ export class Wallet_chartsService {
   data: Array<Array<number>> = [this.Income, this.Bills, this.Food, 
     this.Transportation, this.CreditCard, this.Others];
 
-  dataHomeChart: Array<number> = [5, 5, 5, 5, 5 ,5]
+  nameHomeChart: Array<string> = []
+  dataHomeChart: Array<number> = []
 
   formData: Array<Expense> = [];
+  monthToday: number = new Date().getMonth();
 
   constructor() { 
     this.formData = this.httpService.userAuth!.expenses
   }
   
-  // Verify category name and return index
-  setCategoryToIndex(category: string) :number {
-    let categoryIndex: number
+  categoryToIndex(category: Array<{name: string, value: number, userId?: number}>, name: string){
+    if (!Array.isArray(category)) return -1;
 
-    switch(category){
-      case 'Income':
-        categoryIndex = 0
-        break
-      case 'Bills':
-        categoryIndex = 1
-        break
-      case 'Food':
-        categoryIndex = 2
-        break
-      case 'Transportation':
-        categoryIndex = 3
-        break
-      case 'Credit Card':
-        categoryIndex = 4
-        break
-      case 'Others':
-        categoryIndex = 5
-        break
-      default: 
-        console.log('Category not found');
-        return -1
-      }
-      return categoryIndex;
+    const index = category.findIndex(
+      c => c.name?.trim().toLowerCase() === name?.trim().toLowerCase()
+    );
+
+    if (index === -1) console.warn(`Category "${name}" not found`, category);
+    return index;
+
   }
 
   // Add value data Array on corresponding index
-  addDataValue(value: number, category: number, month: number){
+  addDataValue(value: number, month: number, categoryIndex: number){
+    console.log(categoryIndex)
+
     for (let i = 0; i < this.data.length; i++) {
-        if(i == category){
+        if(i == categoryIndex){
 
           if(this.data[i][month] == undefined){
             this.data[i][month] = 0
@@ -71,29 +57,46 @@ export class Wallet_chartsService {
   }
 
   // Call addDataValue and parse parameters
-  setData(value: number, month: number, category: string){
-    if(month < 0 || month > 11){
+  setData(category: string, value: number, date: string, categories: Array<{name: string, value: number, userId?: number}>){
+    let dateMonth = new Date(date).getMonth();
+
+    if(dateMonth < 0 || dateMonth > 11){
       return console.log('The month must be between 1 and 12');
     }
 
-    const categoryIndex: number = this.setCategoryToIndex(category);
-    this.addDataValue(value, categoryIndex, month);
+    this.addDataValue(value, dateMonth, this.categoryToIndex(categories, category));
   }
 
-  // Create new category
-  setCategory(category: Array<number>){
-    this.data.push(category)
-    console.log(this.data);
-  }
+  // Gets the name and value of categories
+  reloadCategoryValue(){
+    const categoriesCombined = this.combineCategoryArray();
 
-  removeCategory(category: Array<number>){
-    for (let i = 0; i < this.data.length; i++) {
-      if(this.data[i] == category){
-        this.data.splice(i, 1)
-      } else {
-        console.log('Category not found');
+    for (let i = 0; i < categoriesCombined.length; i++) {
+      if(this.nameHomeChart[i] == undefined){
+        this.nameHomeChart[i] = categoriesCombined[i].name
       }
+
+      this.dataHomeChart[i] = categoriesCombined[i].value
     }
+    
+    this.httpService.userAuth!.expenses.forEach(e => {
+      this.setData(e.category, e.value, e.date, categoriesCombined);
+    })
   }
 
+  combineCategoryArray(){
+    const categories = this.httpService.userAuth!.categories;
+
+    const categoriesCombined = Object.values(
+      categories.reduce((acc, curr) => {
+        if (!acc[curr.name]) {
+          acc[curr.name] = { name: curr.name, value: 0, userId: curr.userId };
+        }
+        acc[curr.name].value += curr.value;
+        return acc;
+      }, {} as Record<string, { name: string; value: number; userId?: number }>)
+    );
+
+    return categoriesCombined
+  }
 }

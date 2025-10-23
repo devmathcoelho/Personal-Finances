@@ -4,6 +4,7 @@ import { HttpRequestsService } from './HttpRequests.service';
 import { WalletService } from './Wallet/Wallet.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Wallet_chartsService } from './Wallet/Wallet_charts/Wallet_charts.service';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink, CommonModule],

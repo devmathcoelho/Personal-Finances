@@ -18,8 +18,8 @@ export class HomeComponent {
   walletService = inject(WalletService);
   walletChartService = inject(Wallet_chartsService);
   httpService = inject(HttpRequestsService);
-  app = inject(AppComponent);
   billsService = inject(BillsService);
+  app = inject(AppComponent);
 
   userAmounts = this.walletService.getUserAmounts();
 
@@ -27,8 +27,12 @@ export class HomeComponent {
     this.app.changeSelected(selected);
   }
 
+  constructor(){
+    this.walletChartService.reloadCategoryValue();
+  }
+
   barChartData: ChartData<'pie', number[], string | string[]> = {
-  labels: ['Income', 'Bills', 'Food', 'Transportation', 'Credit Card', 'Others'],
+  labels: this.walletChartService.nameHomeChart,
   datasets: [
     {
       data: this.walletChartService.dataHomeChart,

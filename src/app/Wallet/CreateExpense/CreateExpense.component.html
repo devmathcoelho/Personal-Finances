@@ -1,8 +1,8 @@
-<form #myForm="ngForm" class="main-size">
+<form class="main-size">
   <p class="text-danger text-center m-1" [class.d-none]="hasName">Please insert Name and Value</p>
 
   <div>
-    <label for="name" required class="form-label" #nameInput>Name</label>
+    <label for="name" required class="form-label">Name</label>
     <input type="text" class="form-control border border-light bg-dark text-light" id="name">
   </div>
 
@@ -19,7 +19,7 @@
   </div>
 
   <div>
-    <label for="amount" class="form-label" #amountInput>Amount</label>
+    <label for="amount" class="form-label">Amount</label>
     <input type="number" required class="form-control border border-light bg-dark text-light" id="amount">
   </div>
 

@@ -6,6 +6,7 @@ import { DateFormatService } from '../../DateFormat.service';
 import { WalletService } from '../Wallet.service';
 import { Expense } from '../../Expense';
 import { HttpRequestsService } from '../../HttpRequests.service';
+import { Category } from '../../Category';
 
 @Component({
   selector: 'app-CreateExpense',
@@ -17,8 +18,17 @@ import { HttpRequestsService } from '../../HttpRequests.service';
   styleUrls: ['./CreateExpense.component.css']
 })
 export class CreateExpenseComponent {
+
+  category: Category = {
+    id: undefined,
+    name: '',
+    value: 0,
+    month: 0,
+    userId: undefined
+  }
+  
   expense: Expense = { 
-    id: 0,
+    id: undefined,
     name: '', 
     category: '', 
     value: 0, 
@@ -43,35 +53,26 @@ export class CreateExpenseComponent {
     this.expense.value = Number((document.getElementById('amount') as HTMLInputElement).value);
     this.expense.date = (document.getElementById('date') as HTMLInputElement).value;
     this.expense.userId = this.httpService.userAuth?.id
+    
+    this.category.name = this.expense.category
+    this.category.value = this.expense.value
+    this.category.month = this.dateFormat.formatStringToDate(this.expense.date).getMonth()
+    this.category.userId = this.httpService.userAuth?.id
 
-    if(this.expense.date == '' || this.expense.date == null){ {
+    if(this.expense.date == '' || this.expense.date == null){
       this.expense.date = this.dateFormat.formatDate(this.dateNow);
     }
 
     if(this.expense.name == '' || this.expense.value == 0){
       this.hasName = false;
-      this.expense.category = '';
+      return
     }
+    this.httpService.setRevenue(this.expense);
+    this.httpService.setCategory(this.category)
+    
+    // Reload data to Chart
+    this.chartService.reloadCategoryValue();
 
-    if(this.expense.category == 'Income'){
-      this.httpService.setRevenue(this.expense);
-
-      // Send date to Chart
-      const dateFormated = this.dateFormat.formatStringToDate(this.expense.date);
-      this.dateMonth = dateFormated!.getMonth();
-      this.chartService.setData(this.expense.value, this.dateMonth, this.expense.category)
-
-      this.router.navigate(['/wallet']);
-
-    } else if (this.expense.category != '') {
-      this.httpService.setExpense(this.expense);
-
-      // Send date to Chart
-      const dateFormated = this.dateFormat.formatStringToDate(this.expense.date);
-      this.dateMonth = dateFormated!.getMonth();
-      this.chartService.setData(this.expense.value, this.dateMonth, this.expense.category)
-
-      this.router.navigate(['/wallet']);
-    }
+    this.router.navigate(['/wallet']);
   }
-}}
+}
