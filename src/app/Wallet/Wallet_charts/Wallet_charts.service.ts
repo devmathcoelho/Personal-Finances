@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { Expense } from '../../Expense';
+import { Expense } from '../../../models/Expense';
 import { HttpRequestsService } from '../../HttpRequests.service';
+import { WalletChart } from '../../../models/WalletChart';
 
 @Injectable({
   providedIn: 'root'
@@ -8,15 +9,7 @@ import { HttpRequestsService } from '../../HttpRequests.service';
 export class Wallet_chartsService {
   httpService = inject(HttpRequestsService)
 
-  Income: Array<number> = []
-  Bills: Array<number> = []
-  Food: Array<number> = []
-  Transportation: Array<number> = []
-  CreditCard: Array<number> = []
-  Others: Array<number> = []
-
-  data: Array<Array<number>> = [this.Income, this.Bills, this.Food, 
-    this.Transportation, this.CreditCard, this.Others];
+  data: Array<WalletChart> = [];
 
   nameHomeChart: Array<string> = []
   dataHomeChart: Array<number> = []
@@ -26,6 +19,7 @@ export class Wallet_chartsService {
 
   constructor() { 
     this.formData = this.httpService.userAuth!.expenses
+    this.reloadCategoryValue();
   }
   
   categoryToIndex(category: Array<{name: string, value: number, userId?: number}>, name: string){
@@ -42,45 +36,49 @@ export class Wallet_chartsService {
 
   // Add value data Array on corresponding index
   addDataValue(value: number, month: number, categoryIndex: number){
-    console.log(categoryIndex)
-
     for (let i = 0; i < this.data.length; i++) {
         if(i == categoryIndex){
 
-          if(this.data[i][month] == undefined){
-            this.data[i][month] = 0
+          if(this.data[i].data[month] == undefined){
+            this.data[i].data[month] = 0
           }
-
-          this.data[i][month] += value;
+          this.data[i].data[month] += value;
           break;
         }}
   }
 
   // Call addDataValue and parse parameters
-  setData(category: string, value: number, date: string, categories: Array<{name: string, value: number, userId?: number}>){
+  setData(value: number, date: string, categoryIndex: number){
     let dateMonth = new Date(date).getMonth();
 
     if(dateMonth < 0 || dateMonth > 11){
       return console.log('The month must be between 1 and 12');
     }
-
-    this.addDataValue(value, dateMonth, this.categoryToIndex(categories, category));
+    
+   this.addDataValue(value, dateMonth, categoryIndex);
   }
 
   // Gets the name and value of categories
   reloadCategoryValue(){
     const categoriesCombined = this.combineCategoryArray();
 
-    for (let i = 0; i < categoriesCombined.length; i++) {
-      if(this.nameHomeChart[i] == undefined){
-        this.nameHomeChart[i] = categoriesCombined[i].name
-      }
+    this.data = [];
+    this.nameHomeChart = []
+    this.dataHomeChart = []
 
-      this.dataHomeChart[i] = categoriesCombined[i].value
+    for (let i = 0; i < categoriesCombined.length; i++) {
+      this.data.push({
+        label: categoriesCombined[i].name,
+        data: new Array(12),
+        borderWidth: i === 0 ? 2 : 1
+      });
+      
+      this.nameHomeChart.push(categoriesCombined[i].name);
+      this.dataHomeChart.push(categoriesCombined[i].value);
     }
     
     this.httpService.userAuth!.expenses.forEach(e => {
-      this.setData(e.category, e.value, e.date, categoriesCombined);
+      this.setData(e.value, e.date, this.categoryToIndex(categoriesCombined, e.category));
     })
   }
 

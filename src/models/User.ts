@@ -1,6 +1,6 @@
 import { Category } from "./Category"
-import { Expense, Revenue } from "./Expense"
-import { Bill } from "./Home/Bill"
+import { Expense } from "./Expense"
+import { Bill } from "./Bill"
 
 export type User = {
     id: number,
@@ -9,7 +9,6 @@ export type User = {
     totalRevenue: number,
     totalExpense: number,
     expenses: Expense[],
-    revenues: Revenue[],
     categories: Category[],
     bills: Bill[]
 }

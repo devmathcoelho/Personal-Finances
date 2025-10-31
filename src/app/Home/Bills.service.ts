@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Bill } from './Bill';
+import { Bill } from '../../models/Bill';
 import { DateFormatService } from '../DateFormat.service';
 
 @Injectable({

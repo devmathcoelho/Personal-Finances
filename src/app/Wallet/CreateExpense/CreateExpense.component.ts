@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { Wallet_chartsService } from '../Wallet_charts/Wallet_charts.service';
 import { DateFormatService } from '../../DateFormat.service';
 import { WalletService } from '../Wallet.service';
-import { Expense } from '../../Expense';
+import { Expense } from '../../../models/Expense';
 import { HttpRequestsService } from '../../HttpRequests.service';
-import { Category } from '../../Category';
+import { Category } from '../../../models/Category';
 
 @Component({
   selector: 'app-CreateExpense',
@@ -67,12 +67,25 @@ export class CreateExpenseComponent {
       this.hasName = false;
       return
     }
-    this.httpService.setRevenue(this.expense);
-    this.httpService.setCategory(this.category)
-    
-    // Reload data to Chart
-    this.chartService.reloadCategoryValue();
 
-    this.router.navigate(['/wallet']);
+    this.addToDatabase();
+  }
+
+  async addToDatabase(){
+    await this.httpService.setRevenue(this.expense);
+
+    const requestReturn = await this.httpService.setCategory(this.category);
+
+    if (!requestReturn) {
+      await this.httpService.addToCategory(this.category);
+    }
+
+    this.returnToWallet();
+  }
+
+  returnToWallet(){
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl('/wallet');
+    });
   }
 }

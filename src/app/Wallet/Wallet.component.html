@@ -48,7 +48,7 @@
             <td>{{i.category}}</td>
             <td>{{i.date}}</td>
             <td>
-              <button class="btn btn-danger" (click)="this.httpService.deleteExpense(i)">
+              <button class="btn btn-danger" (click)="this.deleteExpenseAndCategory(i)">
                 <i class="bi bi-trash"></i>
               </button>
             </td>

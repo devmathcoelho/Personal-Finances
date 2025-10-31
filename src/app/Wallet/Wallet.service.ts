@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Expense } from '../Expense';
+import { Expense } from '../../models/Expense';
 import { HttpRequestsService } from '../HttpRequests.service';
 @Injectable({
   providedIn: 'root'

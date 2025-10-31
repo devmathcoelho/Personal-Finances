@@ -15,36 +15,7 @@ export class Wallet_chartsComponent {
   barChartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July',
              'August', 'September', 'October', 'November', 'December'],
-    datasets: [{
-      label: 'Income',
-      data: this.chartService.Income,
-      borderWidth: 2
-    },
-    {
-      label: 'Bills',
-      data: this.chartService.Bills,
-      borderWidth: 1
-    },
-    {
-      label: 'Food',
-      data: this.chartService.Food,
-      borderWidth: 1
-    },
-    {
-      label: 'Transportation',
-      data: this.chartService.Transportation,
-      borderWidth: 1
-    },
-    {
-      label: 'Credit Card',
-      data: this.chartService.CreditCard,
-      borderWidth: 1
-    },
-    {
-      label: 'Others',
-      data: this.chartService.Others,
-      borderWidth: 1
-    }]
+    datasets: this.chartService.data
   };
 
   barChartOptions =  {
