@@ -10,7 +10,7 @@ import { Category } from '../models/Category';
   providedIn: 'root'
 })
 export class HttpRequestsService {
-  private ApiUrl = 'https://www.simplefinances.somee.com/';
+  private ApiUrl = 'https://localhost:7108';
   private http = inject(HttpClient);
 
   private userSubject = new BehaviorSubject<User | null>(null);

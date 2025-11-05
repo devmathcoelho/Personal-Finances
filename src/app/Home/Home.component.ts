@@ -7,11 +7,12 @@ import { BaseChartDirective } from 'ng2-charts';
 import { Wallet_chartsService } from '../Wallet/Wallet_charts/Wallet_charts.service';
 import { ChartData, ChartOptions } from 'chart.js/auto';
 import { HttpRequestsService } from '../HttpRequests.service';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-Home',
   templateUrl: './Home.component.html',
-  imports: [RouterLink, BaseChartDirective],
+  imports: [RouterLink, BaseChartDirective, DecimalPipe],
   styleUrls: ['./Home.component.css']
 })
 export class HomeComponent {

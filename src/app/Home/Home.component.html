@@ -5,10 +5,10 @@
             <div class="col-md-6 col-lg-6 d-grid">
                 <div class="d-flex justify-content-center card bg-primary text-center text-light border border-light">
                     <h4 class="text-{{this.userAmounts.totalAmount < 0 ? 'danger' : 'success' }}">
-                        R${{ this.userAmounts.totalAmount}}
+                        R${{ this.userAmounts.totalAmount | number:'1.2-2' }}
                     </h4>
-                    <p class="text-success mb-0">↑ R${{ this.userAmounts.totalIncomes }}</p>
-                    <p class="text-danger">↓ R$ -{{ this.userAmounts.totalExpenses }}</p>
+                    <p class="text-success mb-0">↑ R${{ this.userAmounts.totalIncomes | number:'1.2-2'  }}</p>
+                    <p class="text-danger">↓ R$ -{{ this.userAmounts.totalExpenses | number:'1.2-2' }}</p>
                 </div>
 
             <!-- Bills -->
